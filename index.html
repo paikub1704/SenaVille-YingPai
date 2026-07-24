@@ -5,410 +5,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>แผนตกแต่งต่อเติมบ้าน — Sena Ville วงแหวน-บางบัวทอง</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+Thai+Looped:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#132A42;
-    --navy-deep:#0C1D30;
-    --blue-line:#3E6690;
-    --grid-bg:#EAF1F7;
-    --paper:#FBFAF6;
-    --orange:#FF6A2B;
-    --slate:#5A7186;
-    --ink:#1B2A38;
-    --ok-green:#2E8B57;
+    --navy:#132A42; --navy-deep:#0C1D30; --blue-line:#3E6690;
+    --grid-bg:#EAF1F7; --paper:#FBFAF6; --orange:#FF6A2B;
+    --slate:#5A7186; --ink:#1B2A38; --ok-green:#2E8B57;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
   body{
-    font-family:'Noto Sans Thai', 'Inter', sans-serif;
-    background:var(--grid-bg);
-    color:var(--ink);
-    background-image:
-      linear-gradient(rgba(62,102,144,0.10) 1px, transparent 1px),
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:var(--grid-bg); color:var(--ink);
+    background-image:linear-gradient(rgba(62,102,144,0.10) 1px, transparent 1px),
       linear-gradient(90deg, rgba(62,102,144,0.10) 1px, transparent 1px);
     background-size:28px 28px;
   }
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    font-size:11px;
-    color:var(--blue-line);
-    font-weight:700;
-  }
-  /* HERO */
-  header.hero{
-    background:var(--navy);
-    color:var(--paper);
-    padding:64px 24px 48px;
-    position:relative;
-    overflow:hidden;
-    border-bottom:6px solid var(--orange);
-  }
-  header.hero::before{
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size:40px 40px;
-    pointer-events:none;
-  }
-  .hero-inner{max-width:1040px; margin:0 auto; position:relative;}
+  .eyebrow{font-family:'JetBrains Mono',monospace; letter-spacing:.18em; text-transform:uppercase; font-size:11px; color:var(--blue-line); font-weight:700;}
+  header.hero{background:var(--navy); color:var(--paper); padding:56px 24px 40px; position:relative; overflow:hidden; border-bottom:6px solid var(--orange);}
+  header.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;}
+  .hero-inner{max-width:1040px;margin:0 auto;position:relative;}
   .hero .eyebrow{color:#8FB8DE;}
-  h1{
-    font-family:'Oswald', sans-serif;
-    font-weight:700;
-    font-size:clamp(32px, 5.4vw, 56px);
-    line-height:1.08;
-    margin-top:14px;
-    letter-spacing:0.01em;
-  }
-  .hero-sub{
-    margin-top:14px;
-    font-size:16px;
-    color:#B9CCE0;
-    max-width:620px;
-    line-height:1.7;
-  }
-  .hero-address{
-    font-family:'JetBrains Mono', monospace;
-    display:inline-block;
-    margin-top:22px;
-    padding:8px 14px;
-    border:1px dashed #4A6E92;
-    color:var(--orange);
-    font-size:13px;
-    letter-spacing:0.04em;
-  }
+  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,5vw,50px);line-height:1.1;margin-top:12px;}
+  .hero-sub{margin-top:12px;font-size:15px;color:#B9CCE0;max-width:620px;line-height:1.7;}
+  .sync-status{font-family:'JetBrains Mono',monospace;font-size:12px;margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px dashed #4A6E92;color:#8FB8DE;}
+  .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--slate);}
+  .sync-dot.live{background:var(--ok-green);box-shadow:0 0 0 3px rgba(46,139,87,.25);}
 
-  /* SUMMARY STRIP */
-  .summary{
-    max-width:1040px;
-    margin:-34px auto 0;
-    position:relative;
-    z-index:2;
-    padding:0 24px;
-  }
-  .summary-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    background:var(--paper);
-    border:1px solid #D3DEE8;
-    box-shadow:0 18px 40px -18px rgba(19,42,66,0.35);
-  }
-  .summary-cell{
-    padding:22px 20px;
-    border-right:1px solid #E1E9F0;
-  }
+  .summary{max-width:1040px;margin:-30px auto 0;position:relative;z-index:2;padding:0 24px;}
+  .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border:1px solid #D3DEE8;box-shadow:0 18px 40px -18px rgba(19,42,66,.35);}
+  .summary-cell{padding:20px 18px;border-right:1px solid #E1E9F0;}
   .summary-cell:last-child{border-right:none;}
-  .summary-cell .label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--slate);
-  }
-  .summary-cell .value{
-    font-family:'Oswald', sans-serif;
-    font-size:26px;
-    font-weight:600;
-    color:var(--navy);
-    margin-top:6px;
-  }
-  .summary-cell .value small{font-size:13px; font-weight:500; color:var(--slate);}
+  .summary-cell .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);}
+  .summary-cell .value{font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:var(--navy);margin-top:5px;}
+  .summary-cell .value small{font-size:12px;font-weight:500;color:var(--slate);}
 
-  main{max-width:1040px; margin:56px auto; padding:0 24px 80px;}
+  main{max-width:1040px;margin:48px auto;padding:0 24px 80px;}
+  .note{font-size:13px;color:var(--slate);background:#fff;border-left:3px solid var(--orange);padding:12px 16px;margin-bottom:32px;line-height:1.7;}
 
-  .note{
-    font-size:13.5px;
-    color:var(--slate);
-    background:#fff;
-    border-left:3px solid var(--orange);
-    padding:12px 16px;
-    margin-bottom:44px;
-    line-height:1.7;
+  /* ADD FORM */
+  .add-box{background:var(--paper);border:1px solid #D3DEE8;padding:20px;margin-bottom:44px;}
+  .add-box h3{font-family:'Oswald',sans-serif;font-size:16px;color:var(--navy);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em;}
+  .add-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:10px;}
+  .add-grid input, .add-grid select{
+    font-family:'Noto Sans Thai',sans-serif;font-size:13.5px;padding:9px 10px;
+    border:1px solid #C9D6E2;background:#fff;color:var(--ink);
   }
+  .add-grid button{
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12.5px;
+    background:var(--orange);color:#fff;border:none;padding:9px 16px;cursor:pointer;
+    letter-spacing:.03em; white-space:nowrap;
+  }
+  .add-grid button:hover{background:#E4571A;}
+  @media (max-width:800px){.add-grid{grid-template-columns:1fr 1fr;}}
 
-  /* PHASE BLOCKS */
   .phase{margin-bottom:52px;}
-  .phase-head{
-    display:flex;
-    align-items:baseline;
-    gap:16px;
-    border-bottom:2px solid var(--navy);
-    padding-bottom:10px;
-    margin-bottom:18px;
-  }
-  .phase-num{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    color:var(--orange);
-    font-weight:700;
-    background:var(--navy);
-    padding:3px 9px;
-  }
-  .phase-title{
-    font-family:'Oswald', sans-serif;
-    font-size:22px;
-    font-weight:600;
-    color:var(--navy);
-  }
-  .phase-period{
-    margin-left:auto;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--slate);
-  }
+  .phase-head{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--navy);padding-bottom:10px;margin-bottom:18px;flex-wrap:wrap;}
+  .phase-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);font-weight:700;background:var(--navy);padding:3px 9px;}
+  .phase-title{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--navy);}
+  .phase-period{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--slate);}
 
-  table{
-    width:100%;
-    border-collapse:collapse;
-    background:var(--paper);
-    font-size:14.5px;
-  }
-  thead th{
-    text-align:left;
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--slate);
-    font-weight:600;
-    padding:8px 12px;
-    border-bottom:1px solid #C9D6E2;
-  }
-  tbody td{
-    padding:12px;
-    border-bottom:1px solid #E7EDF3;
-    vertical-align:middle;
-  }
+  table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px;}
+  thead th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);font-weight:600;padding:8px 12px;border-bottom:1px solid #C9D6E2;}
+  tbody td{padding:11px 12px;border-bottom:1px solid #E7EDF3;vertical-align:middle;}
   tbody tr:hover{background:#F1F6FA;}
-  .item-name{font-weight:600; color:var(--ink);}
-  .price{font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--navy); white-space:nowrap;}
-  .month{font-family:'JetBrains Mono', monospace; color:var(--slate); white-space:nowrap;}
-  .pay-tag{
-    display:inline-block;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    padding:3px 9px;
-    border-radius:2px;
-    white-space:nowrap;
-  }
-  .pay-cash{background:#E4F3EA; color:var(--ok-green); border:1px solid #BFE3CD;}
-  .pay-full{background:#EAF1F7; color:var(--blue-line); border:1px solid #CBDCEC;}
-  .pay-installment{background:#FFEFE6; color:var(--orange); border:1px solid #FFD3B8;}
+  .item-name{font-weight:600;color:var(--ink);}
+  .price{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy);white-space:nowrap;}
+  .month{font-family:'JetBrains Mono',monospace;color:var(--slate);white-space:nowrap;}
+  .pay-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 9px;border-radius:2px;white-space:nowrap;}
+  .pay-cash{background:#E4F3EA;color:var(--ok-green);border:1px solid #BFE3CD;}
+  .pay-full{background:#EAF1F7;color:var(--blue-line);border:1px solid #CBDCEC;}
+  .pay-installment{background:#FFEFE6;color:var(--orange);border:1px solid #FFD3B8;}
+  .del-btn{background:none;border:none;color:#C0392B;cursor:pointer;font-size:16px;line-height:1;padding:4px 6px;}
+  .del-btn:hover{color:#E74C3C;}
+  .empty-row td{text-align:center;color:var(--slate);font-size:13px;padding:16px;font-style:italic;}
 
-  .phase-subtotal{
-    text-align:right;
-    padding:10px 12px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    color:var(--navy);
-    background:#F1F6FA;
-    border-bottom:1px solid #C9D6E2;
-  }
+  .phase-subtotal{text-align:right;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--navy);background:#F1F6FA;border-bottom:1px solid #C9D6E2;}
   .phase-subtotal b{font-size:15px;}
 
-  /* TOTAL */
-  .grand-total{
-    margin-top:8px;
-    background:var(--navy);
-    color:var(--paper);
-    padding:30px 28px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-  }
-  .grand-total .label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:#8FB8DE;
-  }
-  .grand-total .amount{
-    font-family:'Oswald', sans-serif;
-    font-size:38px;
-    font-weight:700;
-    color:var(--orange);
-  }
-  .legend{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-    font-size:12px;
-    color:#B9CCE0;
-  }
-  .legend span{display:flex; align-items:center; gap:6px;}
-  .dot{width:9px; height:9px; display:inline-block;}
-  .dot.cash{background:#2E8B57;}
-  .dot.full{background:#3E6690;}
-  .dot.inst{background:#FF6A2B;}
+  .grand-total{margin-top:8px;background:var(--navy);color:var(--paper);padding:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;}
+  .grand-total .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8FB8DE;}
+  .grand-total .amount{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--orange);}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#B9CCE0;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:9px;height:9px;display:inline-block;}
+  .dot.cash{background:#2E8B57;} .dot.full{background:#3E6690;} .dot.inst{background:#FF6A2B;}
 
-  footer{
-    text-align:center;
-    padding:26px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--slate);
-  }
-
-  @media (max-width:720px){
-    .summary-grid{grid-template-columns:repeat(2,1fr);}
-    .summary-cell:nth-child(2){border-right:none;}
-    table, thead, tbody, th, td, tr{display:block;}
-    thead{display:none;}
-    tbody td{border:none; padding:4px 12px;}
-    tbody tr{padding:12px 0; border-bottom:1px solid #E7EDF3;}
-    .price::before{content:"ราคา  "; font-family:'Noto Sans Thai'; color:var(--slate); font-weight:400;}
-    .month::before{content:"เดือนที่ทำ  "; font-family:'Noto Sans Thai'; color:var(--slate);}
-    .phase-period{margin-left:0; width:100%;}
-  }
+  footer{text-align:center;padding:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--slate);}
 </style>
 </head>
 <body>
 
 <header class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">แผนงานต่อเติม · ฉบับร่างประมาณการ</div>
+    <div class="eyebrow">แผนงานต่อเติม · ซิงค์ข้อมูลทุกอุปกรณ์</div>
     <h1>ตกแต่งต่อเติมบ้าน<br>Sena Ville วงแหวน-บางบัวทอง</h1>
-    <p class="hero-sub">แผนงานตามลำดับขั้นตอนก่อสร้าง ตั้งแต่งานโครงสร้างจนถึงงานตกแต่งภายนอก พร้อมประมาณราคา กำหนดเดือนที่จะดำเนินการ และวิธีการชำระเงินของแต่ละรายการ</p>
-    <div class="hero-address">📍 SENA VILLE · วงแหวน-บางบัวทอง</div>
+    <p class="hero-sub">เพิ่ม/ลบรายการได้จากหน้านี้ ข้อมูลจะอัปเดตให้เห็นตรงกันในทุกอุปกรณ์ที่เปิดหน้านี้แบบ real-time</p>
+    <div class="sync-status"><span class="sync-dot" id="syncDot"></span><span id="syncText">กำลังเชื่อมต่อฐานข้อมูล…</span></div>
   </div>
 </header>
 
 <div class="summary">
   <div class="summary-grid">
-    <div class="summary-cell">
-      <div class="label">งบประมาณรวม (ประมาณการ)</div>
-      <div class="value">780,000 <small>บาท</small></div>
-    </div>
-    <div class="summary-cell">
-      <div class="label">ระยะเวลาโครงการ</div>
-      <div class="value">10 <small>เดือน</small></div>
-    </div>
-    <div class="summary-cell">
-      <div class="label">เริ่มงาน</div>
-      <div class="value" style="font-size:20px">ส.ค. 2569</div>
-    </div>
-    <div class="summary-cell">
-      <div class="label">คาดว่าจะเสร็จ</div>
-      <div class="value" style="font-size:20px">ธ.ค. 2570</div>
-    </div>
+    <div class="summary-cell"><div class="label">งบประมาณรวม (ประมาณการ)</div><div class="value" id="totalAll">— <small>บาท</small></div></div>
+    <div class="summary-cell"><div class="label">จำนวนรายการทั้งหมด</div><div class="value" id="totalCount">—</div></div>
+    <div class="summary-cell"><div class="label">เริ่มงาน</div><div class="value" style="font-size:19px">ส.ค. 2569</div></div>
+    <div class="summary-cell"><div class="label">คาดว่าจะเสร็จ</div><div class="value" style="font-size:19px">พ.ค. 2570</div></div>
   </div>
 </div>
 
 <main>
-  <p class="note">
-    ⚠️ ราคาทั้งหมดในหน้านี้เป็น <b>ตัวเลขประมาณการเบื้องต้น</b> สำหรับใช้วางแผนงบประมาณเท่านั้น ราคาจริงอาจแตกต่างกันตามผู้รับเหมา วัสดุ และร้านค้าที่เลือกใช้ ควรขอใบเสนอราคาจริงก่อนตัดสินใจจ่ายเงินทุกรายการ
-  </p>
+  <p class="note">⚠️ ราคาทั้งหมดเป็นตัวเลขประมาณการเพื่อวางแผนงบเท่านั้น ควรขอใบเสนอราคาจริงก่อนตัดสินใจจ่ายเงิน<br>
+  🔓 หน้านี้เปิดให้ทุกคนที่มีลิงก์แก้ไข/ลบรายการได้ เหมาะสำหรับใช้งานภายในครอบครัวเท่านั้น</p>
 
-  <!-- PHASE 1 -->
-  <section class="phase">
-    <div class="phase-head">
-      <span class="phase-num">01</span>
-      <span class="phase-title">งานโครงสร้าง</span>
-      <span class="phase-period">พ.ย. — เม.ย. 2570</span>
+  <div class="add-box">
+    <h3>+ เพิ่มรายการใหม่</h3>
+    <div class="add-grid">
+      <input id="inName" type="text" placeholder="ชื่อรายการ เช่น โคมไฟ">
+      <input id="inPrice" type="number" placeholder="ราคา (บาท)">
+      <input id="inMonth" type="text" placeholder="เดือน เช่น มิ.ย. 2570">
+      <select id="inPhase"></select>
+      <select id="inPay">
+        <option value="cash">เงินสด</option>
+        <option value="full">บัตรเครดิต · จ่ายเต็ม</option>
+        <option value="installment">บัตรเครดิต · ผ่อนชำระ</option>
+      </select>
+      <button onclick="addItem()">เพิ่มรายการ</button>
     </div>
-    <table>
-      <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th></tr></thead>
-      <tbody>
-        <tr><td class="item-name">เสาเข็ม</td><td class="price">70,000 ฿</td><td class="month">พ.ย. 2569</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-        <tr><td class="item-name">พื้น</td><td class="price">65,000 ฿</td><td class="month">เม.ย. 2570</td><td><span class="pay-tag pay-cash">บัตรเครดิต</span></td></tr>
-        <tr><td class="item-name">หลังคา</td><td class="price">75,000 ฿</td><td class="month">ม.ค. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-      </tbody>
-    </table>
-    <div class="phase-subtotal">รวมงานโครงสร้าง &nbsp; <b>210,000 ฿</b></div>
-  </section>
+  </div>
 
-  <!-- PHASE 2 -->
-  <section class="phase">
-    <div class="phase-head">
-      <span class="phase-num">02</span>
-      <span class="phase-title">งานครัว</span>
-      <span class="phase-period">เม.ย. 2570</span>
-    </div>
-    <table>
-      <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th></tr></thead>
-      <tbody>
-        <tr><td class="item-name">ชุดครัว (built-in)</td><td class="price">70,000 ฿</td><td class="month">เม.ย. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-        <tr><td class="item-name">ฮูดดูดควัน</td><td class="price">10,000 ฿</td><td class="month">เม.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">เตา</td><td class="price">15,000 ฿</td><td class="month">เม.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">ซิงค์ล้างจาน</td><td class="price">5,000 ฿</td><td class="month">เม.ย. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-      </tbody>
-    </table>
-    <div class="phase-subtotal">รวมงานครัว &nbsp; <b>100,000 ฿</b></div>
-  </section>
+  <div id="phasesContainer"></div>
 
-  <!-- PHASE 3 -->
-  <section class="phase">
-    <div class="phase-head">
-      <span class="phase-num">03</span>
-      <span class="phase-title">เฟอร์นิเจอร์และของใช้ในบ้าน</span>
-      <span class="phase-period">พ.ค. 2570 — มิ.ย. 2570</span>
-    </div>
-    <table>
-      <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th></tr></thead>
-      <tbody>
-        <tr><td class="item-name">ชั้นวางทีวี</td><td class="price">20,000 ฿</td><td class="month">พ.ค. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-        <tr><td class="item-name">ตู้เสื้อผ้า</td><td class="price">40,000 ฿</td><td class="month">พ.ค. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-        <tr><td class="item-name">เตียงนอน (2 ชุด)</td><td class="price">30,000 ฿</td><td class="month">พ.ค. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-        <tr><td class="item-name">ที่นอน (2 ชุด)</td><td class="price">40,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">โซฟา</td><td class="price">20,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">โต๊ะกินข้าว</td><td class="price">35,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-      </tbody>
-    </table>
-    <div class="phase-subtotal">รวมเฟอร์นิเจอร์ &nbsp; <b>185,000 ฿</b></div>
-  </section>
-
-  <!-- PHASE 4 -->
-  <section class="phase">
-    <div class="phase-head">
-      <span class="phase-num">04</span>
-      <span class="phase-title">ระบบและเครื่องใช้ไฟฟ้า</span>
-      <span class="phase-period">พ.ค. 2570 — มิ.ย. 2570</span>
-    </div>
-    <table>
-      <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th></tr></thead>
-      <tbody>
-        <tr><td class="item-name">แอร์ (3-4 ตัว)</td><td class="price">80,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-        <tr><td class="item-name">ม่าน</td><td class="price">20,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-        <tr><td class="item-name">มุ้งลวด</td><td class="price">15,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-        <tr><td class="item-name">เครื่องซักผ้า</td><td class="price">25,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">ตู้เย็น</td><td class="price">25,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-full">บัตรเครดิต · จ่ายเต็ม</span></td></tr>
-        <tr><td class="item-name">Digital Door Lock</td><td class="price">10,000 ฿</td><td class="month">มิ.ย. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-      </tbody>
-    </table>
-    <div class="phase-subtotal">รวมระบบและเครื่องใช้ไฟฟ้า &nbsp; <b>175,000 ฿</b></div>
-  </section>
-
-  <!-- PHASE 5 -->
-  <section class="phase">
-    <div class="phase-head">
-      <span class="phase-num">05</span>
-      <span class="phase-title">งานภายนอกและพื้นที่ส่วนบุคคล</span>
-      <span class="phase-period">ธ.ค. 2570</span>
-    </div>
-    <table>
-      <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th></tr></thead>
-      <tbody>
-        <tr><td class="item-name">ห้องพระ</td><td class="price">20,000 ฿</td><td class="month">ธ.ค. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-        <tr><td class="item-name">รั้ว</td><td class="price">70,000 ฿</td><td class="month">ธ.ค. 2570</td><td><span class="pay-tag pay-installment">บัตรเครดิต · ผ่อนชำระ</span></td></tr>
-        <tr><td class="item-name">จัดสวนอีกฝั่ง</td><td class="price">20,000 ฿</td><td class="month">ธ.ค. 2570</td><td><span class="pay-tag pay-cash">เงินสด</span></td></tr>
-      </tbody>
-    </table>
-    <div class="phase-subtotal">รวมงานภายนอก &nbsp; <b>110,000 ฿</b></div>
-  </section>
-
-  <!-- GRAND TOTAL -->
   <div class="grand-total">
     <div>
       <div class="label">งบประมาณรวมทั้งโครงการ</div>
-      <div class="amount">780,000 ฿</div>
+      <div class="amount" id="grandTotal">— ฿</div>
     </div>
     <div class="legend">
       <span><i class="dot cash"></i>เงินสด</span>
@@ -418,9 +148,173 @@
   </div>
 </main>
 
-<footer>
-  SENA VILLE — วงแหวน-บางบัวทอง &nbsp;·&nbsp; แผนตกแต่งต่อเติมบ้าน (ฉบับประมาณการ)
-</footer>
+<footer>SENA VILLE — วงแหวน-บางบัวทอง · แผนตกแต่งต่อเติมบ้าน (ฉบับประมาณการ)</footer>
+
+<script type="module">
+  // ===================================================================
+  // 1) วางค่า firebaseConfig ของคุณตรงนี้ (ได้จาก Firebase Console)
+  // ===================================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyCqNsHiBg7ZXZgmsZqR23rrhzEEBYxPgLQ",
+    authDomain: "senaville-reno.firebaseapp.com",
+    projectId: "senaville-reno",
+    storageBucket: "senaville-reno.firebasestorage.app",
+    messagingSenderId: "833109466062",
+    appId: "1:833109466062:web:c7260eac0873064f8a299f"
+  };
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, deleteDoc, doc,
+    onSnapshot, getDocs, writeBatch, query, orderBy
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const itemsCol = collection(db, "renovationItems");
+
+  const PHASES = [
+    {num:"01", key:1, title:"งานโครงสร้าง", period:"ส.ค. — ต.ค. 2569"},
+    {num:"02", key:2, title:"งานครัว", period:"พ.ย. 2569"},
+    {num:"03", key:3, title:"เฟอร์นิเจอร์และของใช้ในบ้าน", period:"ธ.ค. 2569 — ม.ค. 2570"},
+    {num:"04", key:4, title:"ระบบและเครื่องใช้ไฟฟ้า", period:"ก.พ. — มี.ค. 2570"},
+    {num:"05", key:5, title:"งานภายนอกและพื้นที่ส่วนบุคคล", period:"เม.ย. — พ.ค. 2570"},
+  ];
+
+  const DEFAULT_ITEMS = [
+    {name:"เสาเข็ม", price:50000, month:"ส.ค. 2569", phase:1, pay:"cash"},
+    {name:"พื้น", price:80000, month:"ก.ย. 2569", phase:1, pay:"cash"},
+    {name:"หลังคา", price:120000, month:"ต.ค. 2569", phase:1, pay:"installment"},
+    {name:"ชุดครัว (built-in)", price:100000, month:"พ.ย. 2569", phase:2, pay:"installment"},
+    {name:"ฮูดดูดควัน", price:8000, month:"พ.ย. 2569", phase:2, pay:"full"},
+    {name:"เตา", price:15000, month:"พ.ย. 2569", phase:2, pay:"full"},
+    {name:"ซิงค์ล้างจาน", price:5000, month:"พ.ย. 2569", phase:2, pay:"cash"},
+    {name:"ชั้นวางทีวี", price:15000, month:"ธ.ค. 2569", phase:3, pay:"cash"},
+    {name:"ตู้เสื้อผ้า", price:25000, month:"ธ.ค. 2569", phase:3, pay:"installment"},
+    {name:"เตียงนอน (2 ชุด)", price:30000, month:"ม.ค. 2570", phase:3, pay:"installment"},
+    {name:"ที่นอน (2 ชุด)", price:20000, month:"ม.ค. 2570", phase:3, pay:"full"},
+    {name:"โซฟา", price:25000, month:"ม.ค. 2570", phase:3, pay:"full"},
+    {name:"โต๊ะกินข้าว", price:15000, month:"ม.ค. 2570", phase:3, pay:"cash"},
+    {name:"แอร์ (3-4 ตัว)", price:80000, month:"ก.พ. 2570", phase:4, pay:"installment"},
+    {name:"ม่าน", price:20000, month:"ก.พ. 2570", phase:4, pay:"cash"},
+    {name:"มุ้งลวด", price:15000, month:"ก.พ. 2570", phase:4, pay:"cash"},
+    {name:"เครื่องซักผ้า", price:15000, month:"มี.ค. 2570", phase:4, pay:"full"},
+    {name:"ตู้เย็น", price:15000, month:"มี.ค. 2570", phase:4, pay:"full"},
+    {name:"Digital Door Lock", price:5000, month:"มี.ค. 2570", phase:4, pay:"cash"},
+    {name:"ห้องพระ", price:20000, month:"เม.ย. 2570", phase:5, pay:"cash"},
+    {name:"รั้ว", price:60000, month:"เม.ย. 2570", phase:5, pay:"installment"},
+    {name:"จัดสวนอีกฝั่ง", price:30000, month:"พ.ค. 2570", phase:5, pay:"cash"},
+  ];
+
+  const payLabel = {cash:"เงินสด", full:"บัตรเครดิต · จ่ายเต็ม", installment:"บัตรเครดิต · ผ่อนชำระ"};
+  const payClass = {cash:"pay-cash", full:"pay-full", installment:"pay-installment"};
+
+  // build phase selector + skeleton containers
+  const phaseSelect = document.getElementById("inPhase");
+  const container = document.getElementById("phasesContainer");
+  PHASES.forEach(p=>{
+    const opt = document.createElement("option");
+    opt.value = p.key; opt.textContent = `เฟส ${p.num} — ${p.title}`;
+    phaseSelect.appendChild(opt);
+
+    const section = document.createElement("section");
+    section.className = "phase";
+    section.innerHTML = `
+      <div class="phase-head">
+        <span class="phase-num">${p.num}</span>
+        <span class="phase-title">${p.title}</span>
+        <span class="phase-period">${p.period}</span>
+      </div>
+      <table>
+        <thead><tr><th>รายการ</th><th>ราคาประมาณ</th><th>เดือนที่ทำ</th><th>การชำระเงิน</th><th></th></tr></thead>
+        <tbody id="tbody-${p.key}"></tbody>
+      </table>
+      <div class="phase-subtotal">รวม${p.title} &nbsp; <b id="subtotal-${p.key}">0 ฿</b></div>
+    `;
+    container.appendChild(section);
+  });
+
+  // seed default data once if collection is empty
+  async function seedIfEmpty(){
+    const snap = await getDocs(itemsCol);
+    if(snap.empty){
+      const batch = writeBatch(db);
+      DEFAULT_ITEMS.forEach(item=>{
+        const ref = doc(itemsCol);
+        batch.set(ref, {...item, createdAt: Date.now()});
+      });
+      await batch.commit();
+    }
+  }
+
+  function render(items){
+    PHASES.forEach(p=>{
+      const tbody = document.getElementById(`tbody-${p.key}`);
+      const rows = items.filter(i=>Number(i.phase)===p.key);
+      let subtotal = 0;
+      tbody.innerHTML = rows.length ? rows.map(i=>{
+        subtotal += Number(i.price)||0;
+        return `<tr>
+          <td class="item-name">${escapeHtml(i.name)}</td>
+          <td class="price">${Number(i.price).toLocaleString()} ฿</td>
+          <td class="month">${escapeHtml(i.month)}</td>
+          <td><span class="pay-tag ${payClass[i.pay]||'pay-cash'}">${payLabel[i.pay]||i.pay}</span></td>
+          <td><button class="del-btn" title="ลบรายการ" onclick="window.deleteItem('${i.id}')">✕</button></td>
+        </tr>`;
+      }).join("") : `<tr class="empty-row"><td colspan="5">ยังไม่มีรายการในเฟสนี้</td></tr>`;
+      document.getElementById(`subtotal-${p.key}`).textContent = subtotal.toLocaleString()+" ฿";
+    });
+
+    const grand = items.reduce((s,i)=>s+(Number(i.price)||0),0);
+    document.getElementById("grandTotal").textContent = grand.toLocaleString()+" ฿";
+    document.getElementById("totalAll").innerHTML = grand.toLocaleString()+" <small>บาท</small>";
+    document.getElementById("totalCount").textContent = items.length;
+  }
+
+  function escapeHtml(str){
+    const d = document.createElement("div");
+    d.textContent = str ?? "";
+    return d.innerHTML;
+  }
+
+  window.addItem = async function(){
+    const name = document.getElementById("inName").value.trim();
+    const price = document.getElementById("inPrice").value;
+    const month = document.getElementById("inMonth").value.trim();
+    const phase = Number(document.getElementById("inPhase").value);
+    const pay = document.getElementById("inPay").value;
+    if(!name || !price || !month){ alert("กรอกชื่อรายการ ราคา และเดือนให้ครบก่อนครับ"); return; }
+    await addDoc(itemsCol, {name, price:Number(price), month, phase, pay, createdAt: Date.now()});
+    document.getElementById("inName").value = "";
+    document.getElementById("inPrice").value = "";
+    document.getElementById("inMonth").value = "";
+  };
+
+  window.deleteItem = async function(id){
+    if(!confirm("ลบรายการนี้ใช่ไหม?")) return;
+    await deleteDoc(doc(db, "renovationItems", id));
+  };
+
+  // init
+  (async ()=>{
+    try{
+      await seedIfEmpty();
+      const q = query(itemsCol, orderBy("createdAt"));
+      onSnapshot(q, snap=>{
+        const items = snap.docs.map(d=>({id:d.id, ...d.data()}));
+        render(items);
+        document.getElementById("syncDot").classList.add("live");
+        document.getElementById("syncText").textContent = "เชื่อมต่อสำเร็จ · ข้อมูลซิงค์แบบ real-time";
+      }, err=>{
+        document.getElementById("syncText").textContent = "เชื่อมต่อไม่สำเร็จ — ตรวจสอบ firebaseConfig";
+        console.error(err);
+      });
+    }catch(err){
+      document.getElementById("syncText").textContent = "เชื่อมต่อไม่สำเร็จ — ตรวจสอบ firebaseConfig";
+      console.error(err);
+    }
+  })();
+</script>
 
 </body>
 </html>
