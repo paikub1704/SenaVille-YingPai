@@ -680,11 +680,6 @@ new Chart(document.getElementById('debtChart'), {
     container.appendChild(section);
   });
 
-);
-      await batch.commit();
-    }
-  }
-
   function render(items){
     PHASES.forEach(p=>{
       const tbody = document.getElementById(`tbody-${p.key}`);
