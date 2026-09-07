@@ -84,17 +84,18 @@
   #page-debt .section-title { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
   #page-debt .add-box { background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
   #page-debt .add-box h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
-  #page-debt .add-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.8fr 1fr 1fr auto; gap: 8px; }
+  #page-debt .add-grid { display: flex; flex-wrap: wrap; gap: 8px; }
   #page-debt .add-grid input, #page-debt .add-grid select {
+    flex: 1 1 140px; min-width: 120px; max-width: 100%;
     font-family: 'Sarabun','Noto Sans Thai', sans-serif; font-size: 13px; padding: 9px 10px;
     border: 0.5px solid var(--border); border-radius: var(--radius-md); background: var(--bg-page); color: var(--text-primary);
   }
   #page-debt .add-grid button {
+    flex: 1 1 100%;
     font-weight: 600; font-size: 13px; background: var(--accent); color: #fff; border: none;
-    padding: 9px 16px; border-radius: var(--radius-md); cursor: pointer; white-space: nowrap;
+    padding: 10px 16px; border-radius: var(--radius-md); cursor: pointer; white-space: nowrap;
   }
   #page-debt .add-grid button:hover { opacity: 0.9; }
-  @media (max-width: 760px) { #page-debt .add-grid { grid-template-columns: 1fr 1fr; } }
   #page-debt .debt-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
   #page-debt .debt-card { background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s; user-select: none; position: relative; }
   #page-debt .debt-card:hover { border-color: var(--border-hover); }
@@ -503,9 +504,9 @@ function normalizeDebt(raw, idx){
     limit:   Number(raw.Limit ?? raw.limit) || (Number(raw.Balance ?? raw.balance) || 1),
     rate:    Number(raw.Rate ?? raw.rate) || 0,
     minPay:  Number(raw.MinPay ?? raw.minPay) || 0,
-    color:   raw.Color ?? raw.color ?? pal.color,
-    icon:    raw.Icon ?? raw.icon ?? pal.icon,
-    iconBg:  raw.IconBg ?? raw.iconBg ?? pal.iconBg,
+    color:   raw.Color || raw.color || pal.color,
+    icon:    raw.Icon || raw.icon || pal.icon,
+    iconBg:  raw.IconBg || raw.iconBg || pal.iconBg,
   };
 }
 
