@@ -49,6 +49,7 @@
     --border-hover: rgba(0,0,0,0.28);
     --radius-md: 8px;
     --radius-lg: 12px;
+    --accent: #534AB7;
     background: var(--bg-page);
     color: var(--text-primary);
     min-height: 100vh;
@@ -72,14 +73,30 @@
   #page-debt .header-icon { width: 40px; height: 40px; border-radius: var(--radius-md); background: #534AB7; display: flex; align-items: center; justify-content: center; font-size: 20px; }
   #page-debt .header-title { font-size: 20px; font-weight: 600; color: var(--text-primary); }
   #page-debt .header-sub { font-size: 13px; color: var(--text-secondary); margin-left: 52px; }
+  #page-debt .sync-status{font-size:11px;margin-top:8px;margin-left:52px;display:inline-flex;align-items:center;gap:6px;color:var(--text-hint);}
+  #page-debt .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text-hint);}
+  #page-debt .sync-dot.live{background:#1D9E75;}
   #page-debt .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem; }
   #page-debt .metric { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem 1rem 0.85rem; }
   #page-debt .metric-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.03em; }
   #page-debt .metric-value { font-size: 20px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
   #page-debt .metric-sub { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
   #page-debt .section-title { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+  #page-debt .add-box { background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  #page-debt .add-box h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+  #page-debt .add-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.8fr 1fr 1fr auto; gap: 8px; }
+  #page-debt .add-grid input, #page-debt .add-grid select {
+    font-family: 'Sarabun','Noto Sans Thai', sans-serif; font-size: 13px; padding: 9px 10px;
+    border: 0.5px solid var(--border); border-radius: var(--radius-md); background: var(--bg-page); color: var(--text-primary);
+  }
+  #page-debt .add-grid button {
+    font-weight: 600; font-size: 13px; background: var(--accent); color: #fff; border: none;
+    padding: 9px 16px; border-radius: var(--radius-md); cursor: pointer; white-space: nowrap;
+  }
+  #page-debt .add-grid button:hover { opacity: 0.9; }
+  @media (max-width: 760px) { #page-debt .add-grid { grid-template-columns: 1fr 1fr; } }
   #page-debt .debt-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
-  #page-debt .debt-card { background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s; user-select: none; }
+  #page-debt .debt-card { background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s; user-select: none; position: relative; }
   #page-debt .debt-card:hover { border-color: var(--border-hover); }
   #page-debt .debt-card.open { border-color: var(--border-hover); }
   #page-debt .card-row { display: flex; align-items: center; gap: 10px; }
@@ -92,6 +109,8 @@
   #page-debt .card-rate-label { font-size: 12px; color: var(--text-secondary); margin-top: 1px; }
   #page-debt .chevron { font-size: 10px; color: var(--text-hint); flex-shrink: 0; transition: transform 0.2s; margin-left: 4px; }
   #page-debt .debt-card.open .chevron { transform: rotate(180deg); }
+  #page-debt .debt-del { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #C0392B; cursor: pointer; font-size: 15px; padding: 4px 6px; z-index: 2; }
+  #page-debt .debt-del:hover { color: #E74C3C; }
   #page-debt .prog-wrap { margin-top: 10px; }
   #page-debt .prog-bg { height: 4px; background: var(--bg-secondary); border-radius: 99px; overflow: hidden; }
   #page-debt .prog-fill { height: 4px; border-radius: 99px; }
@@ -117,6 +136,7 @@
   #page-debt .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 12px; }
   #page-debt .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
   #page-debt .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  #page-debt .empty-hint { text-align: center; color: var(--text-hint); font-size: 13px; padding: 20px; font-style: italic; background: var(--bg-primary); border: 0.5px dashed var(--border); border-radius: var(--radius-lg); }
   #page-debt code { font-family: 'Courier New', monospace; background: var(--bg-secondary); padding: 1px 5px; border-radius: 4px; font-size: 12px; color: var(--text-primary); }
   @media (max-width: 440px) {
     #page-debt .summary-grid { grid-template-columns: 1fr 1fr; }
@@ -310,10 +330,24 @@
       <div class="header-icon">💸</div>
       <div class="header-title">ปลดหนี้ ภายในปี 2570</div>
     </div>
-    <div class="header-sub">ติดตามหนี้ทั้งหมดของคุณในที่เดียว อัพเดท 29/06/2569</div>
+    <div class="header-sub">ติดตามหนี้ทั้งหมดของคุณในที่เดียว</div>
+    <div class="sync-status"><span class="sync-dot" id="debtSyncDot"></span><span id="debtSyncText">กำลังเชื่อมต่อฐานข้อมูล…</span></div>
   </div>
 
   <div class="summary-grid" id="summaryGrid"></div>
+
+  <div class="add-box">
+    <h3>+ เพิ่มรายการหนี้</h3>
+    <div class="add-grid">
+      <input id="debtName" type="text" placeholder="ชื่อหนี้ เช่น บัตรเครดิต UOB">
+      <input id="debtType" type="text" placeholder="ประเภท เช่น บัตรเครดิต">
+      <input id="debtBalance" type="number" placeholder="ยอดหนี้คงเหลือ (บาท)">
+      <input id="debtLimit" type="number" placeholder="วงเงิน/ยอดกู้เต็ม (บาท)">
+      <input id="debtRate" type="number" step="0.01" placeholder="ดอกเบี้ย %/ปี">
+      <input id="debtMinPay" type="number" placeholder="ชำระขั้นต่ำ/เดือน">
+      <button onclick="addDebt()">เพิ่มรายการ</button>
+    </div>
+  </div>
 
   <p class="section-title">รายการหนี้ทั้งหมด</p>
   <div class="debt-list" id="debtList"></div>
@@ -437,188 +471,211 @@ function switchPage(pageId, btn){
 
 <script>
 // ============================================================
-//  PAGE 1 LOGIC — ปลดหนี้
-//  ✏️  แก้ไขข้อมูลหนี้ของคุณที่นี่
+//  PAGE 1 LOGIC — ปลดหนี้ (now loaded from Google Sheets)
 // ============================================================
-const debts = [
-  {
-    name:    'บัตรเครดิต UOB',
-    type:    'บัตรเครดิต',
-    balance: 0,
-    limit:   252100,
-    rate:    16,
-    minPay:  0,
-    color:   '#534AB7',
-    icon:    '💳',
-    iconBg:  '#EEEDFE',
-  },
-  {
-    name:    'สินเชื่อบ้าน ธอส',
-    type:    'สินเชื่อบ้าน',
-    balance: 4952279,
-    limit:   4952279,
-    rate:    1.49,
-    minPay:  14,200,
-    color:   '#0F6E56',
-    icon:    '🏦',
-    iconBg:  '#E1F5EE',
-  },
-  {
-    name:    'สินเชื่อรถ Krungsri Auto',
-    type:    'สินเชื่อรถ',
-    balance: 1000000,
-    limit:   1200000,
-    rate:    8.99,
-    minPay:  16,172,
-    color:   '#185FA5',
-    icon:    '🏦',
-    iconBg:  '#E6F1FB',
-  },
-  {
-    name:    'สินเชื่อส่วนบุคคล UOB',
-    type:    'สินเชื่อส่วนบุคคล',
-    balance: 150000,
-    limit:   200000,
-    rate:    22.99,
-    minPay:  5640,
-    color:   '#D85A30',
-    icon:    '🏦',
-    iconBg:  '#FAECE7',
-  },
-  {
-    name:    'สินเชื่อส่วนบุคคล กรุงศรี',
-    type:    'สินเชื่อส่วนบุคคล',
-    balance: 162760,
-    limit:   193000,
-    rate:    22,
-    minPay:  5441,
-    color:   '#BA7517',
-    icon:    '🏦',
-    iconBg:  '#FAEEDA',
-  },
-];
-// ============================================================
-//  ⛔ ห้ามแก้ไขโค้ดด้านล่างนี้
-// ============================================================
-
 function fmt(n) { return Math.round(n).toLocaleString('th-TH'); }
 function fmtK(n) { return n >= 10000 ? (n / 1000).toFixed(1) + 'K' : Math.round(n).toString(); }
 
-const totalDebt    = debts.reduce((a, d) => a + d.balance, 0);
-const totalIntYear = debts.reduce((a, d) => a + d.balance * d.rate / 100, 0);
-const totalMinPay  = debts.reduce((a, d) => a + d.minPay, 0);
+// Palette cycled through for debts that don't specify their own color/icon.
+const DEBT_PALETTE = [
+  { color:'#534AB7', iconBg:'#EEEDFE', icon:'💳' },
+  { color:'#0F6E56', iconBg:'#E1F5EE', icon:'🏦' },
+  { color:'#185FA5', iconBg:'#E6F1FB', icon:'🏦' },
+  { color:'#D85A30', iconBg:'#FAECE7', icon:'🏦' },
+  { color:'#BA7517', iconBg:'#FAEEDA', icon:'🏦' },
+];
 
-const summaryGrid = document.getElementById('summaryGrid');
-[
-  { label: 'ยอดหนี้รวม',             value: '฿' + fmt(totalDebt),    sub: 'ทุกรายการ' },
-  { label: 'ดอกเบี้ยปีละ (ประมาณ)', value: '฿' + fmt(totalIntYear), sub: 'ดอกเบี้ยรวม' },
-  { label: 'ยอดชำระขั้นต่ำ/เดือน',  value: '฿' + fmt(totalMinPay),  sub: 'รวมทุกรายการ' },
-].forEach(m => {
-  const el = document.createElement('div');
-  el.className = 'metric';
-  el.innerHTML = `<div class="metric-label">${m.label}</div><div class="metric-value">${m.value}</div><div class="metric-sub">${m.sub}</div>`;
-  summaryGrid.appendChild(el);
-});
+let debtChartInstance = null;
 
-const list = document.getElementById('debtList');
-debts.forEach(d => {
-  const pct       = Math.round(d.balance / d.limit * 100);
-  const intYear   = Math.round(d.balance * d.rate / 100);
-  const intMonth  = Math.round(intYear / 12);
-  const avlAmt    = d.limit - d.balance;
-  const avlPct    = 100 - pct;
-  const badgeClass = d.rate >= 20 ? 'badge-danger' : d.rate >= 15 ? 'badge-warn' : 'badge-ok';
-  const badgeLabel = d.rate >= 20 ? 'ดอกเบี้ยสูงมาก' : d.rate >= 15 ? 'ดอกเบี้ยสูง' : 'ดอกเบี้ยต่ำ';
+function escapeHtmlDebt(str){
+  const d = document.createElement("div");
+  d.textContent = str ?? "";
+  return d.innerHTML;
+}
 
-  const card = document.createElement('div');
-  card.className = 'debt-card';
-  card.innerHTML = `
-    <div class="card-row">
-      <div class="card-icon" style="background:${d.iconBg}">${d.icon}</div>
-      <div class="card-info">
-        <div class="card-name">${d.name}</div>
-        <div class="card-type">${d.type}</div>
-      </div>
-      <div class="card-right">
-        <div class="card-amount">฿${fmt(d.balance)}</div>
-        <div class="card-rate-label">${d.rate}% ต่อปี</div>
-      </div>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${d.color}"></div></div>
-      <div class="prog-labels">
-        <span class="prog-label">ใช้ไป ${pct}%</span>
-        <span class="prog-label">วงเงิน ฿${fmt(d.limit)}</span>
-      </div>
-    </div>
-    <div class="detail-panel">
-      <div class="detail-grid">
-        <div class="detail-box">
-          <div class="detail-box-label">ดอกเบี้ยต่อปี (ประมาณ)</div>
-          <div class="detail-box-value red">฿${fmt(intYear)}</div>
-        </div>
-        <div class="detail-box">
-          <div class="detail-box-label">ดอกเบี้ยต่อเดือน</div>
-          <div class="detail-box-value amber">฿${fmt(intMonth)}</div>
-        </div>
-        <div class="detail-box">
-          <div class="detail-box-label">อัตราดอกเบี้ยต่อปี</div>
-          <div class="detail-box-value">${d.rate}%</div>
-        </div>
-        <div class="detail-box">
-          <div class="detail-box-label">ยอดชำระขั้นต่ำ/เดือน</div>
-          <div class="detail-box-value">฿${fmt(d.minPay)}</div>
-        </div>
-      </div>
-      <div>
-        <div class="avl-label">
-          วงเงินคงเหลือ ฿${fmt(avlAmt)} (${avlPct}%)
-          <span class="badge ${badgeClass}">${badgeLabel}</span>
-        </div>
-        <div class="avl-bg"><div class="avl-fill" style="width:${avlPct}%"></div></div>
-      </div>
-    </div>
-  `;
-  card.addEventListener('click', () => card.classList.toggle('open'));
-  list.appendChild(card);
-});
+function normalizeDebt(raw, idx){
+  const pal = DEBT_PALETTE[idx % DEBT_PALETTE.length];
+  return {
+    id:      raw.ID ?? raw.id,
+    name:    raw.Name ?? raw.name ?? '',
+    type:    raw.Type ?? raw.type ?? '',
+    balance: Number(raw.Balance ?? raw.balance) || 0,
+    limit:   Number(raw.Limit ?? raw.limit) || (Number(raw.Balance ?? raw.balance) || 1),
+    rate:    Number(raw.Rate ?? raw.rate) || 0,
+    minPay:  Number(raw.MinPay ?? raw.minPay) || 0,
+    color:   raw.Color ?? raw.color ?? pal.color,
+    icon:    raw.Icon ?? raw.icon ?? pal.icon,
+    iconBg:  raw.IconBg ?? raw.iconBg ?? pal.iconBg,
+  };
+}
 
-const legend = document.getElementById('chartLegend');
-debts.forEach(d => {
-  legend.innerHTML += `
-    <span class="legend-item">
-      <span class="legend-dot" style="background:${d.color}"></span>
-      ${d.name.split(' ').slice(0, 2).join(' ')} ฿${fmtK(d.balance)}
-    </span>`;
-});
+function renderDebts(rawItems){
+  const debts = (rawItems || []).map(normalizeDebt);
 
-new Chart(document.getElementById('debtChart'), {
-  type: 'doughnut',
-  data: {
-    labels: debts.map(d => d.name),
-    datasets: [{
-      data: debts.map(d => d.balance),
-      backgroundColor: debts.map(d => d.color),
-      borderWidth: 2,
-      borderColor: 'transparent',
-      hoverOffset: 8,
-    }],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '65%',
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: ctx => ` ฿${fmt(ctx.raw)}  (${Math.round(ctx.raw / totalDebt * 100)}%)`,
+  const totalDebt    = debts.reduce((a, d) => a + d.balance, 0);
+  const totalIntYear = debts.reduce((a, d) => a + d.balance * d.rate / 100, 0);
+  const totalMinPay  = debts.reduce((a, d) => a + d.minPay, 0);
+
+  const summaryGrid = document.getElementById('summaryGrid');
+  summaryGrid.innerHTML = '';
+  [
+    { label: 'ยอดหนี้รวม',             value: '฿' + fmt(totalDebt),    sub: 'ทุกรายการ' },
+    { label: 'ดอกเบี้ยปีละ (ประมาณ)', value: '฿' + fmt(totalIntYear), sub: 'ดอกเบี้ยรวม' },
+    { label: 'ยอดชำระขั้นต่ำ/เดือน',  value: '฿' + fmt(totalMinPay),  sub: 'รวมทุกรายการ' },
+  ].forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'metric';
+    el.innerHTML = `<div class="metric-label">${m.label}</div><div class="metric-value">${m.value}</div><div class="metric-sub">${m.sub}</div>`;
+    summaryGrid.appendChild(el);
+  });
+
+  const list = document.getElementById('debtList');
+  list.innerHTML = '';
+  if (!debts.length){
+    list.innerHTML = `<div class="empty-hint">ยังไม่มีรายการหนี้ เพิ่มรายการแรกได้ด้านบน</div>`;
+  }
+  debts.forEach(d => {
+    const pct       = Math.round(d.balance / d.limit * 100);
+    const intYear   = Math.round(d.balance * d.rate / 100);
+    const intMonth  = Math.round(intYear / 12);
+    const avlAmt    = d.limit - d.balance;
+    const avlPct    = 100 - pct;
+    const badgeClass = d.rate >= 20 ? 'badge-danger' : d.rate >= 15 ? 'badge-warn' : 'badge-ok';
+    const badgeLabel = d.rate >= 20 ? 'ดอกเบี้ยสูงมาก' : d.rate >= 15 ? 'ดอกเบี้ยสูง' : 'ดอกเบี้ยต่ำ';
+
+    const card = document.createElement('div');
+    card.className = 'debt-card';
+    card.innerHTML = `
+      <button class="debt-del" title="ลบรายการ" onclick="event.stopPropagation(); window.deleteDebt('${d.id}')">✕</button>
+      <div class="card-row">
+        <div class="card-icon" style="background:${d.iconBg}">${d.icon}</div>
+        <div class="card-info">
+          <div class="card-name">${escapeHtmlDebt(d.name)}</div>
+          <div class="card-type">${escapeHtmlDebt(d.type)}</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount">฿${fmt(d.balance)}</div>
+          <div class="card-rate-label">${d.rate}% ต่อปี</div>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-bg"><div class="prog-fill" style="width:${Math.max(0,Math.min(100,pct))}%;background:${d.color}"></div></div>
+        <div class="prog-labels">
+          <span class="prog-label">ใช้ไป ${pct}%</span>
+          <span class="prog-label">วงเงิน ฿${fmt(d.limit)}</span>
+        </div>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-grid">
+          <div class="detail-box">
+            <div class="detail-box-label">ดอกเบี้ยต่อปี (ประมาณ)</div>
+            <div class="detail-box-value red">฿${fmt(intYear)}</div>
+          </div>
+          <div class="detail-box">
+            <div class="detail-box-label">ดอกเบี้ยต่อเดือน</div>
+            <div class="detail-box-value amber">฿${fmt(intMonth)}</div>
+          </div>
+          <div class="detail-box">
+            <div class="detail-box-label">อัตราดอกเบี้ยต่อปี</div>
+            <div class="detail-box-value">${d.rate}%</div>
+          </div>
+          <div class="detail-box">
+            <div class="detail-box-label">ยอดชำระขั้นต่ำ/เดือน</div>
+            <div class="detail-box-value">฿${fmt(d.minPay)}</div>
+          </div>
+        </div>
+        <div>
+          <div class="avl-label">
+            วงเงินคงเหลือ ฿${fmt(avlAmt)} (${avlPct}%)
+            <span class="badge ${badgeClass}">${badgeLabel}</span>
+          </div>
+          <div class="avl-bg"><div class="avl-fill" style="width:${Math.max(0,Math.min(100,avlPct))}%"></div></div>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => card.classList.toggle('open'));
+    list.appendChild(card);
+  });
+
+  const legend = document.getElementById('chartLegend');
+  legend.innerHTML = '';
+  debts.forEach(d => {
+    legend.innerHTML += `
+      <span class="legend-item">
+        <span class="legend-dot" style="background:${d.color}"></span>
+        ${escapeHtmlDebt(d.name.split(' ').slice(0, 2).join(' '))} ฿${fmtK(d.balance)}
+      </span>`;
+  });
+
+  if (debtChartInstance){ debtChartInstance.destroy(); debtChartInstance = null; }
+  if (debts.length){
+    debtChartInstance = new Chart(document.getElementById('debtChart'), {
+      type: 'doughnut',
+      data: {
+        labels: debts.map(d => d.name),
+        datasets: [{
+          data: debts.map(d => d.balance),
+          backgroundColor: debts.map(d => d.color),
+          borderWidth: 2,
+          borderColor: 'transparent',
+          hoverOffset: 8,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ฿${fmt(ctx.raw)}  (${totalDebt ? Math.round(ctx.raw / totalDebt * 100) : 0}%)`,
+            },
+          },
         },
       },
-    },
-  },
-});
+    });
+  }
+}
+
+window.addDebt = async function(){
+  const name = document.getElementById('debtName').value.trim();
+  const type = document.getElementById('debtType').value.trim();
+  const balance = document.getElementById('debtBalance').value;
+  const limit = document.getElementById('debtLimit').value;
+  const rate = document.getElementById('debtRate').value;
+  const minPay = document.getElementById('debtMinPay').value;
+  if (!name || balance === '' ) { alert('กรอกชื่อหนี้และยอดหนี้คงเหลือให้ครบก่อนครับ'); return; }
+  try{
+    await apiPost({
+      action: 'create',
+      sheet: 'Debts',
+      data: {
+        Name: name,
+        Type: type,
+        Balance: Number(balance),
+        Limit: limit === '' ? Number(balance) : Number(limit),
+        Rate: rate === '' ? 0 : Number(rate),
+        MinPay: minPay === '' ? 0 : Number(minPay),
+        CreatedAt: Date.now(),
+      },
+    });
+    document.getElementById('debtName').value = '';
+    document.getElementById('debtType').value = '';
+    document.getElementById('debtBalance').value = '';
+    document.getElementById('debtLimit').value = '';
+    document.getElementById('debtRate').value = '';
+    document.getElementById('debtMinPay').value = '';
+    await loadCloudData();
+  }catch(e){ alert('บันทึกไม่สำเร็จ: ' + e.message); console.error(e); }
+};
+
+window.deleteDebt = async function(id){
+  if(!confirm('ลบรายการหนี้นี้ใช่ไหม?')) return;
+  try{ await apiPost({ action:'delete', sheet:'Debts', id }); await loadCloudData(); }
+  catch(e){ alert('ลบไม่สำเร็จ: ' + e.message); console.error(e); }
+};
 </script>
 
 <script>
@@ -826,19 +883,24 @@ new Chart(document.getElementById('debtChart'), {
 
   async function loadCloudData(){
     if(GOOGLE_SHEETS_API.includes("PASTE_YOUR")){
+      document.getElementById("debtSyncText").textContent="ยังไม่ได้ตั้งค่า Google Apps Script API";
       document.getElementById("syncText").textContent="ยังไม่ได้ตั้งค่า Google Apps Script API";
       document.getElementById("expSyncText").textContent="ยังไม่ได้ตั้งค่า Google Apps Script API";
-      render([]); renderExpenses([]); return;
+      renderDebts([]); render([]); renderExpenses([]); return;
     }
     try{
       const data=await apiGetAll();
+      renderDebts(data.debts||[]);
       render(data.renovation||[]);
       renderExpenses(data.expenses||[]);
+      document.getElementById("debtSyncDot").classList.add("live");
+      document.getElementById("debtSyncText").textContent="เชื่อมต่อสำเร็จ · Google Sheets";
       document.getElementById("syncDot").classList.add("live");
       document.getElementById("syncText").textContent="เชื่อมต่อสำเร็จ · Google Sheets";
       document.getElementById("expSyncDot").classList.add("live");
       document.getElementById("expSyncText").textContent="เชื่อมต่อสำเร็จ · Google Sheets";
     }catch(err){
+      document.getElementById("debtSyncText").textContent="เชื่อมต่อไม่สำเร็จ — ตรวจสอบ Apps Script URL";
       document.getElementById("syncText").textContent="เชื่อมต่อไม่สำเร็จ — ตรวจสอบ Apps Script URL";
       document.getElementById("expSyncText").textContent="เชื่อมต่อไม่สำเร็จ — ตรวจสอบ Apps Script URL";
       console.error(err);
