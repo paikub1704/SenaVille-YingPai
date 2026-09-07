@@ -691,7 +691,7 @@ new Chart(document.getElementById('debtChart'), {
           <td class="item-name">${escapeHtml(i.Name ?? i.name)}</td>
           <td class="price">${Number(i.price).toLocaleString()} ฿</td>
           <td class="month">${escapeHtml(i.Month ?? i.month)}</td>
-          <td><span class="pay-tag ${payClass[i.Pay ?? i.pay]||'pay-cash'}">${payLabel[i.Pay ?? i.pay]||i.Pay ?? i.pay}</span></td>
+          <td><span class="pay-tag ${payClass[i.Pay ?? i.pay]||'pay-cash'}">${payLabel[i.Pay ?? i.pay] || (i.Pay ?? i.pay)}</span></td>
           <td><button class="del-btn" title="ลบรายการ" onclick="window.deleteItem('${i.ID ?? i.id}')">✕</button></td>
         </tr>`;
       }).join("") : `<tr class="empty-row"><td colspan="5">ยังไม่มีรายการในเฟสนี้</td></tr>`;
